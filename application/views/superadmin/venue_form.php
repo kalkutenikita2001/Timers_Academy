@@ -1654,34 +1654,31 @@
         //         }
         //     });
         // }
-        function renderPlanPreview() {
-            const container = $('#planPreview');
-            container.empty();
+     function renderPlanPreview() {
+    const container = $('#planPreview');
+    container.empty();
 
-            $('#planContainer .plan-item').each(function() {
-                const membershipName = $(this).find('input').eq(0).val();
-                const duration = $(this).find('input').eq(1).val();
-                const period = $(this).find('select').eq(0).val();
-                const slot = $(this).find('input').eq(3).val() || ''; // Correct slot input
-                const regFee = parseFloat($(this).find('input').eq(3).val()) || 0;
-                // const coachingFee = parseFloat($(this).find('input').eq(3).val()) || 0;
-                const coachingFee = parseFloat($(this).find('input').eq(4).val()) || 0;
-                const totalFeeInput = parseFloat($(this).find('input').eq(4).val()) || 0;
+    $('#planContainer .plan-item').each(function() {
+        const membershipName = $(this).find('input').eq(0).val();
+        const duration = $(this).find('input').eq(1).val();
+        const period = $(this).find('select').eq(0).val();
+        const slot = $(this).find('input').eq(3).val() || '';
 
-                // Correct totalFee calculation
-                const totalFee = (regFee + coachingFee);
+        const regFee = parseFloat($(this).find('input').eq(4).val()) || 0;
+        const coachingFee = parseFloat($(this).find('input').eq(5).val()) || 0;
+        const totalFee = parseFloat($(this).find('input').eq(6).val()) || (regFee + coachingFee);
 
-                if (membershipName && duration && period) {
-                    const div = $(`
+        if (membershipName && duration && period) {
+            const div = $(`
                 <div class="court-slot-block mb-2">
                     <h5>${membershipName} - ${duration} ${period} <small>${slot}</small></h5>
                     <p>Registration: ₹${regFee}, Coaching: ₹${coachingFee}, <strong>Total: ₹${totalFee}</strong></p>
                 </div>
             `);
-                    container.append(div);
-                }
-            });
+            container.append(div);
         }
+    });
+}
 
 
 
