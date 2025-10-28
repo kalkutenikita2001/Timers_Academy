@@ -20,6 +20,7 @@ class Staff_model extends CI_Model
   }
   public function get_all_staff()
   {
-    return $this->db->get('staff')->result_array();
+    $query = $this->db->get('staff'); // SELECT * FROM staff
+    return $query->result_array();
   }
 }
