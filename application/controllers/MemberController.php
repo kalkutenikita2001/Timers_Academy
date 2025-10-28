@@ -1,16 +1,19 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class MemberController extends CI_Controller {
+class MemberController extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model(['MemberModel', 'GroupModel', 'SubscriptionModel', 'FacilityModel', 'PaymentModel']);
         $this->load->helper(['url', 'form']);
         $this->load->library('form_validation');
     }
 
-    public function saveMember() {
+    public function saveMember()
+    {
         $post = $this->input->post();
 
         // --- 1️⃣ SAVE MEMBER ---
