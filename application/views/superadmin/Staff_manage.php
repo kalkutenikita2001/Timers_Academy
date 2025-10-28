@@ -92,9 +92,11 @@
           </div>
         </div>
         <div class="d-flex flex-wrap gap-2">
-          <a class="btn btn-primary" id="addStaffBtn" href="<?php echo base_url('superadmin/Add_NewStaff'); ?>">
-            <i class="bi bi-plus-circle me-1"></i>Add Staff
-          </a>
+          <a class="btn btn-primary" id="addStaffBtn"
+   href="<?php echo base_url('superadmin/Add_NewStaff'); ?>?autopopup=1">
+  <i class="bi bi-plus-circle me-1"></i>Add Staff
+</a>
+
         </div>
       </div>
 
@@ -111,7 +113,7 @@
         <div class="flex-grow-1">
           <div class="input-group global-search">
             <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-            <input id="searchBox" type="text" class="form-control border-start-0" placeholder="Search staff by name, email, role, center or status...">
+            <input id="searchBox" type="text" class="form-control border-start-0" placeholder="Search staff by name, role, center or status...">
           </div>
         </div>
         <div class="d-flex align-items-center gap-2">
@@ -129,7 +131,6 @@
             <tr>
               <th style="width:56px">#</th>
               <th>Name</th>
-              <th>Email</th>
               <th>Contact</th>
               <th>Join Date</th>
               <th>Role</th>
@@ -225,13 +226,12 @@
               </div>
             </div>
           </td>
-          <td>${s.email||'-'}</td>
           <td>${s.contact||'-'}</td>
           <td>${s.joining_date||'-'}</td>
           <td><span class="badge text-bg-light">${s.role||'-'}</span></td>
           <td>${centers.join(', ')||'-'}</td>
           <td>${(s.role==='Coach' && slots.length) ? slots.join(', ') : '-'}</td>
-          <td class="text-end">₹ ${INR(Number(s.salary||0))}</td>
+<td class="text-end"><span style="font-family: inherit;">₹</span>&nbsp;${INR(Number(s.salary||0))}</td>
           <td class="text-center">
             <span class="status-badge ${status==='Active'?'status-active':'status-deactive'}">${status}</span>
           </td>
@@ -239,7 +239,6 @@
             <div class="row-actions btn-group">
               <button class="btn btn-ghost btn-sm" data-act="view" data-id="${s.id}" title="View"><i class="bi bi-eye"></i></button>
               <button class="btn btn-ghost btn-sm" data-act="edit" data-id="${s.id}" title="Edit"><i class="bi bi-pencil"></i></button>
-              <button class="btn btn-ghost btn-sm text-danger" data-act="del" data-id="${s.id}" title="Delete"><i class="bi bi-trash"></i></button>
             </div>
           </td>`;
         tr.addEventListener('click', (e)=>{ if (!e.target.closest('.row-actions') && !e.target.closest('button')) goDetail(s.id); });
@@ -281,7 +280,6 @@
           <div class="d-flex gap-2 mt-3">
             <button class="btn btn-ghost w-100" data-act="view" data-id="${s.id}"><i class="bi bi-eye me-1"></i>View</button>
             <button class="btn btn-ghost w-100" data-act="edit" data-id="${s.id}"><i class="bi bi-pencil me-1"></i>Edit</button>
-            <button class="btn btn-ghost w-100 text-danger" data-act="del" data-id="${s.id}"><i class="bi bi-trash me-1"></i>Delete</button>
           </div>`;
         list.appendChild(card);
       });
@@ -306,7 +304,6 @@
         const act = btn.dataset.act;
         if (act==='view') goDetail(id);
         else if (act==='edit') window.location.href = "<?php echo base_url('superadmin/Add_NewStaff'); ?>?id="+id;
-        else if (act==='del') alert('Hook your backend delete endpoint here.');
       });
 
       // load strictly from DB
@@ -349,7 +346,7 @@
       backdrop.style.position = 'fixed';
       backdrop.style.inset = '0';
       backdrop.style.background = 'rgba(0,0,0,0.42)';
-      backdrop.style.zIndex = '1070';
+      backdrop.style.zIndex = '10';
       backdrop.style.display = 'none';
       backdrop.style.opacity = '0';
       backdrop.style.transition = 'opacity .18s ease';

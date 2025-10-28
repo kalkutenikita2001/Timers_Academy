@@ -587,6 +587,28 @@ class Superadmin extends MY_Controller
 		echo json_encode($response);
 		exit; // Important to stop further output
 	}
+	// public function updateStaff()
+	// {
+	// 	$id = $this->input->post('id');
+	// 	$data = [
+	// 		'name' => $this->input->post('name'),
+	// 		'email' => $this->input->post('email'),
+	// 		'contact' => $this->input->post('contact'),
+	// 		'joining_date' => $this->input->post('joining_date'),
+	// 		'salary' => $this->input->post('salary'),
+	// 		'role' => $this->input->post('role'),
+	// 		'centers' => $this->input->post('centers') ? implode(',', $this->input->post('centers')) : '',
+	// 		'slots' => $this->input->post('slots') ? implode(',', $this->input->post('slots')) : '',
+	// 	];
+
+	// 	$this->db->where('id', $id);
+	// 	if ($this->db->update('staff', $data)) {
+	// 		$this->session->set_flashdata('success', 'Staff updated successfully.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error', 'Failed to update staff.');
+	// 	}
+	// 	redirect('superadmin/Add_NewStaff');
+	// }
 	public function updateStaff()
 	{
 		$id = $this->input->post('id');
@@ -603,11 +625,13 @@ class Superadmin extends MY_Controller
 
 		$this->db->where('id', $id);
 		if ($this->db->update('staff', $data)) {
-			$this->session->set_flashdata('success', 'Staff updated successfully.');
+			// Return JSON response for AJAX
+			echo json_encode(['success' => true, 'message' => 'Staff updated successfully.']);
 		} else {
-			$this->session->set_flashdata('error', 'Failed to update staff.');
+			// Return JSON response for AJAX
+			echo json_encode(['success' => false, 'message' => 'Failed to update staff.']);
 		}
-		redirect('superadmin/Add_NewStaff');
+		exit; // Important: Stop execution after JSON response
 	}
 	public function deleteStaff()
 	{
